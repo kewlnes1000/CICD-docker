@@ -71,6 +71,6 @@ sudo docker-compose up -d
 
 #### Congratulations! Open your website
 
-**See Traefik Dashboard :** [http://<your default host or ip>:8080/dashboard/#/](https://ip:8080/dashboard/#/)  
+**See Traefik Dashboard :** [http://<你的Default域名>:8080/dashboard/#/](https://ip:8080/dashboard/#/)  
   
 **See Drone Dashboard :** [https://<你的Drone域名>](https://drone.demo.com)
