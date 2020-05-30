@@ -69,4 +69,6 @@ run docker
 sudo docker-compose up -d
 ```
 
-#### End
+#### Congratulations! Open your website
+**See Traefik Dashboard : http://<your default host or ip>:8080/dashboard/#/ **
+**See Drone Dashboard : https://<你的Drone域名> **
