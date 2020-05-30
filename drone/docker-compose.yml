@@ -1,0 +1,52 @@
+version: "2"
+
+services:
+  drone-server:
+    container_name: drone-server
+    image: drone/drone:1
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    environment:
+      - DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
+      - DRONE_SERVER_PROTO=${DRONE_SERVER_PROTO}
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+
+      # GitHub Config
+      - DRONE_GITHUB_SERVER=https://github.com
+      - DRONE_GITHUB_CLIENT_ID=${DRONE_GITHUB_CLIENT_ID}
+      - DRONE_GITHUB_CLIENT_SECRET=${DRONE_GITHUB_CLIENT_SECRET}
+      - DRONE_LOGS_PRETTY=true
+      - DRONE_LOGS_COLOR=true
+    networks:
+      - web
+    logging:
+      options:
+        max-size: "100k"
+        max-file: "3"
+    labels:
+      - traefik.http.routers.drone-server.rule=Host(`${DRONE_SERVER_HOST}`)
+      - traefik.http.routers.drone-server.tls=true
+      - traefik.http.routers.drone-server.tls.certresolver=myresolver
+
+  # runner for docker version
+  drone-runner:
+    container_name: drone-runner
+    image: drone/drone-runner-docker:1
+    restart: always
+    depends_on:
+      - drone-server
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_RPC_HOST=${DRONE_RPC_HOST}
+      - DRONE_RPC_PROTO=${DRONE_RPC_PROTO}
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+      - DRONE_RUNNER_CAPACITY=3
+
+networks:
+  web:
+    external: true
