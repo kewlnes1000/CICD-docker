@@ -61,8 +61,6 @@ DRONE_GITHUB_CLIENT_SECRET=<From Github OAuth Apps>
 DRONE_RPC_HOST=drone-server
 DRONE_RPC_PROTO=http
 DRONE_RPC_SECRET=<剛剛生成的密鑰>
-
-
 ```
 
 run docker
