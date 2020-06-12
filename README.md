@@ -4,7 +4,7 @@
 
 [![Traefik](https://i.imgur.com/ogJ7QDk.png "Traefik")](https://i.imgur.com/ogJ7QDk.png "Traefik")
 
-[![Drone](https://i.imgur.com/mhnLo1t.png "Drone")](https://i.imgur.com/mhnLo1t.png "Drone")
+[![Drone](https://i.imgur.com/fhvMJys.png "Drone")
 
 ### Features
 
