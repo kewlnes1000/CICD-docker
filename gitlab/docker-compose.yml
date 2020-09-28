@@ -1,0 +1,41 @@
+version: "3.6"
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    networks:
+      - web
+    volumes:
+      - ./data:/var/opt/gitlab
+      - ./logs:/var/log/gitlab
+      - ./config:/etc/gitlab
+#      - ./omnibus_config.rb:/omnibus_config.rb
+#      - ./root_password.txt:/root_password.txt
+#    environment:
+#      GITLAB_OMNIBUS_CONFIG: "from_file('/omnibus_config.rb')"
+#    configs:
+#      - source: gitlab
+#        target: /omnibus_config.rb
+#    secrets:
+#      - gitlab_root_password
+    labels:
+      - traefik.http.routers.gitlab-server.rule=Host(`gitlab.doze.tech`)
+      - traefik.http.routers.gitlab-server.tls=true
+      - traefik.http.routers.gitlab-server.tls.certresolver=myresolver
+      - traefik.http.services.gitlab-server.loadbalancer.server.port=80
+
+#  gitlab-runner:
+#    image: gitlab/gitlab-runner:alpine
+#    deploy:
+#      mode: replicated
+#      replicas: 4
+
+#configs:
+#  gitlab:
+#    file: ./gitlab.rb
+#secrets:
+#  gitlab_root_password:
+#    file: ./root_password.txt
+
+networks:
+  web:
+    external: true
