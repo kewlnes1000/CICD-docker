@@ -8,7 +8,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./assets:/flarum/app/public/assets
+      - ./public:/flarum/app/public
       - ./extensions:/flarum/app/extensions
       - ./nginx:/etc/nginx/conf.d
     depends_on:
